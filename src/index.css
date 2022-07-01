@@ -1,0 +1,74 @@
+:root {
+  --white: #fff;
+  --gridBackground: #0077c7;
+  --letterValid: #e7002a;
+  --letterExists: #ffbd00;
+}
+
+body {
+  font-family: "Roboto Medium", Ubuntu, Arial, Helvetica, sans-serif;
+}
+
+.motus-app {
+  display: flex;
+  justify-content: center;
+  background: rgb(203, 53, 49);
+  background: radial-gradient(circle, rgba(203, 53, 49, 1) 10%, rgba(134, 29, 23, 1) 100%);
+  min-height: 100vh;
+}
+
+.layout__title {
+  font-size: 3rem;
+  text-align: center;
+  margin: 2rem auto;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, .3);
+}
+
+.layout__title span {
+  color: var(--letterExists);
+}
+
+.wrapper {
+  transition: opacity .5s ease;
+}
+
+.wrapper--loading {
+    opacity: .5;
+}
+
+.grid {
+  background: var(--gridBackground);
+}
+
+.row {
+  display: flex;
+}
+
+.row:not(:first-of-type) .letter{
+  border-top: 0;
+}
+
+.letter {
+  width: 4rem;
+  height: 4rem;
+  font-size: 2rem;
+  color: var(--white);
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid var(--white);
+}
+
+.letter:not(:last-of-type) {
+  border-right: 0;
+}
+
+.letter--exists {
+  background: var(--letterExists);
+}
+
+.letter--valid {
+  background: var(--letterValid);
+}
