@@ -1,6 +1,6 @@
 import Letter,{LetterDataType} from '../letter/letter';
 
-type RowPropsType= {
+export type RowPropsType= {
   rowData: LetterDataType[];
 }
 

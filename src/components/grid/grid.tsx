@@ -1,53 +1,28 @@
 import Row from '../row/row';
 
-export default function Grid() {
-  const gridData = [
-    [
-      {character: 'a', status: 'letter--exists'},
-      {character: 'b', status: ''},
-      {character: 'c', status: 'letter--valid'},
-      {character: 'd', status: 'letter--exists'},
-      {character: 'e', status: ''},
-    ],
-    [
-      {character: 'f', status: ''},
-      {character: 'g', status: 'letter--exists'},
-      {character: 'h', status: 'letter--valid'},
-      {character: 'i', status: 'letter--exists'},
-      {character: 'j', status: ''},
-    ],
-    [
-      {character: 'k', status: 'letter--exists'},
-      {character: 'l', status: 'letter--exists'},
-      {character: 'm', status: ''},
-      {character: 'n', status: 'letter--valid'},
-      {character: 'o', status: 'letter--valid'},
-    ],
-    [
-      {character: 'p', status: 'letter--exists'},
-      {character: 'q', status: ''},
-      {character: 'r', status: ''},
-      {character: 's', status: ''},
-      {character: 't', status: 'letter--valid'},
-    ],
-    [
-      {character: 'u', status: 'letter--valid'},
-      {character: 'v', status: 'letter--exists'},
-      {character: 'w', status: 'letter--valid'},
-      {character: 'x', status: 'letter--exists'},
-      {character: 'y', status: 'letter--exists'},
-    ],
-    [
-      {character: 'z', status: ''},
-      {character: 'aa', status: ''},
-      {character: 'ab', status: 'letter--exists'},
-      {character: 'ac', status: ''},
-      {character: 'ad', status: ''},
-    ]
-  ]
-    
+type InputPropsType= {
+  input: string
+}
+
+export const wordLength = 5
+
+export default function Grid({input}:InputPropsType){
+  let currentRow = 0
+  
+  const inputData = Array.from(input).map((item:string) => ({character: item , status: ''}));
+  const rows = Array.from(Array(6).keys());
+  const wordData = Array.from(Array(wordLength).keys());
+  const gridData = rows.map(() => wordData.map(() => ({character: '', status: ''})));
+  
+  for(let i = 0; i < wordLength; i++) {
+    gridData[currentRow][i].character = '.'
+    if(input[i] != null) {
+      gridData[currentRow][i] = inputData[i]
+    }
+  }
+
   return <div className='grid'>
-      {gridData.map(item => <Row rowData={item}/>)}
-    </div>
+    {gridData.map(item => <Row rowData={item}/>)}
+  </div>
 }
   
