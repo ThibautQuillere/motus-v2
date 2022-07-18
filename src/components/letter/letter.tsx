@@ -8,7 +8,8 @@ type LetterProps = {
 }
 
 export default function Letter({data}:LetterProps) {
-  return <li className={'letter ' + data.status}>{data.character}</li>
+  // console.log(data);
+  return <li className={`letter letter--${data.status ? data.status:'default'}`}>{data.character}</li>
 }
 
 
