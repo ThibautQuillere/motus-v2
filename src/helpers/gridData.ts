@@ -8,6 +8,31 @@ export type GridDataMapperType = {
     checkStatus?: boolean;
 }
 
+export type RowTemplateType = {
+    rowIndex: number;
+    wordData: number[];
+    currentRow: number;
+    word: string
+}
+
+export const rowTemplate = ({
+    rowIndex,
+    wordData,
+    currentRow,
+    word,
+}:RowTemplateType):LetterDataType[] => wordData.map((item, index) => {
+    let character = '';
+    if(rowIndex === currentRow) {
+      character = '.';
+      if(index === 0) {
+        character = word[0];
+      }
+    }
+    return {
+      character,
+      status: ''}
+  });
+
 export function remapGridData ({
   currentRow, 
   gridData,
@@ -47,5 +72,22 @@ export function remapGridData ({
   
   const newGridData = [...gridData];
   newGridData[currentRow] = newRowData;
+  if(checkStatus && currentRow < 5) {
+    if(word === inputValue) {
+        alert('KELAWIN')
+    } else {
+        newGridData[currentRow+1] = rowTemplate({
+        rowIndex: currentRow,
+        word,
+        wordData: Array.from(Array(word.length).keys()),
+        currentRow,
+        });
+    }
+    
+  }
+  if(checkStatus && currentRow ===5) {
+    alert('NUL')
+  }
+  
   return newGridData;
 }

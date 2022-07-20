@@ -4,8 +4,10 @@ export type RowPropsType = {
   rowData: LetterDataType[];
 }
 
-export default function Row(props:RowPropsType) {
+export default function Row({rowData}:RowPropsType) {
   return <ul className='row'>
-    {props.rowData.map(item => <Letter data={item}/>)}
-  </ul>
-}
+    { 
+      rowData.length > 0 &&
+      rowData.map( (item, index) => <Letter key={index} data={item} />) 
+    }</ul>
+    }
