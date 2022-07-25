@@ -1,10 +1,12 @@
 import { LetterDataType } from "../components/letter/letter";
+import { Endpoints } from "../components/wrapper/wrapper";
 
 export type GridDataMapperType = {
     gridData: LetterDataType[][];
     currentRow: number;
     inputValue: string;
     checkStatus?: boolean;
+    firstLetter: string
 }
 
 export type RowTemplateType = {
@@ -37,42 +39,27 @@ export function remapGridData ({
   gridData,
   inputValue, 
   checkStatus = false,
+  firstLetter,
 }:GridDataMapperType):LetterDataType[][] {
+  const nextRowData =gridData[currentRow].map((letterObject, index) => {
+    let character = '.';
+    let status = '';
+
+    if(index === 0) {
+      character = firstLetter;
+    }
+    
+    return {
+      character,
+      status,
+    }});
+
   const newRowData = gridData[currentRow].map((letterObject, index) => {
     let character = '.';
     let status = '';
 
- /* if(checkStatus) {
-    
-      fetch(Endpoints.checkWord,
-        {
-          method: 'POST',
-          headers : {
-            'Accept' : 'application/json',
-            'Content-Type' : 'application/json'
-          },
-            body: JSON.stringify({
-            word: 'string'
-          })
-      });
-
-      fetch(Endpoints.attempt,
-          {
-            method: 'POST',
-            headers : {
-              'Accept' : 'application/json',
-              'Content-Type' : 'application/json'
-            },
-              body: JSON.stringify({
-              attempt: 'string'
-            })
-       }).then(res => console.log(res));
-       
-    }*/
-    
-
     if(index === 0 && typeof inputValue[index] === 'undefined') {
-      //character = firstLetter;
+      character = firstLetter;
     }
 
     if(inputValue[index]) {
@@ -85,12 +72,19 @@ export function remapGridData ({
     }
   }); 
   
+  
   const newGridData = [...gridData];
+  console.log(newGridData)
+  if(checkStatus) {
+    if(currentRow < 5){
+      newGridData[currentRow + 1] = nextRowData
+    }
+  }
   newGridData[currentRow] = newRowData;
   if(checkStatus && currentRow < 5) {
-    //victoire / defaite
+    //victoire 
   }
-  if(checkStatus && currentRow ===5) {
+  if(checkStatus && currentRow === 5) {
     alert('NUL')
   }
   
