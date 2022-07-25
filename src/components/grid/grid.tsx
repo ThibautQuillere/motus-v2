@@ -6,7 +6,6 @@ export type gridPropsType = {
  }
 
  export default function Grid({gridData}:gridPropsType){
-
   return <div className='grid'>
     {gridData.map((item, index) => <Row rowData={item} key={index}/>)}
   </div>
