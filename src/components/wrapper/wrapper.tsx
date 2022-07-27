@@ -27,7 +27,6 @@ export default function Wrapper() {
           rawInput = rawInput + event.key;
         }
       }
-
       /*
         Event : Press key BACKSPACE
         Action : Supp last character of newInputValue
@@ -35,6 +34,7 @@ export default function Wrapper() {
       if (event.keyCode === 8) {
         rawInput = rawInput.substring(0, rawInput.length - 1);
       }
+
       setGridData(remapGridData({
         gridData,
         currentRow,
@@ -46,7 +46,7 @@ export default function Wrapper() {
 
     /*
       Event : Press key between ENTER
-      Action : Coparison betwen newInputValue and the word
+      Action : Comparison betwen newInputValue and the word
     */
     if (event.keyCode === 13) {
       rawInput = newInputValue;
