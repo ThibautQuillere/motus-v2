@@ -1,37 +1,56 @@
 import { LetterDataType } from "../components/letter/letter";
 
+export type StatusMapperType = {
+  gridData: LetterDataType[][];
+  currentRowIndex: number;
+  currentRowData: LetterDataType[]
+}
+
 export type GridDataMapperType = {
-    gridData: LetterDataType[][];
-    currentRow: number;
-    inputValue: string;
-    checkStatus?: boolean;
-    firstLetter: string;
+  gridData: LetterDataType[][];
+  currentRow: number;
+  inputValue: string;
+  checkStatus?: boolean;
+  firstLetter: string;
 }
 
 export type RowTemplateType = {
-    rowIndex: number;
-    row: number[];
-    currentRow: number;
-    firstLetter: string;
+  rowIndex: number;
+  row: number[];
+  currentRow: number;
+  firstLetter: string;
+}
+
+export function remapStatus ({
+  gridData,
+  currentRowIndex,
+  currentRowData,
+}:StatusMapperType):LetterDataType[][] {
+  const newGridData = [...gridData];
+  newGridData[currentRowIndex] = currentRowData;
+  return newGridData
 }
 
 export const rowTemplate = ({
-    rowIndex,
-    row,
-    currentRow,
-    firstLetter,
+  rowIndex,
+  row,
+  currentRow,
+  firstLetter,
 }:RowTemplateType):LetterDataType[] => row.map((item, index) => {
-    let character = '';
-    if(rowIndex === currentRow) {
-      character = '.';
-      if(index === 0) {
-        character = firstLetter;
-      }
+  let character = '';
+  if(rowIndex === currentRow) {
+    character = '.';
+    if(index === 0) {
+      character = firstLetter;
     }
-    return {
-      character,
-      status: ''}
-  });
+  }
+  return {
+    character,
+    status: ''
+  }
+});
+
+
 
 export function remapGridData ({
   currentRow, 
@@ -51,7 +70,8 @@ export function remapGridData ({
     return {
       character,
       status,
-    }});
+    }
+  });
 
   const newRowData = gridData[currentRow].map((letterObject, index) => {
     let character = '.';
@@ -78,10 +98,13 @@ export function remapGridData ({
       newGridData[currentRow + 1] = nextRowData
     }
   }
+
   newGridData[currentRow] = newRowData;
+
   if(checkStatus && currentRow < 5) {
-    //victoire 
+    //victoire
   }
+
   if(checkStatus && currentRow === 5) {
     alert('NUL');
   }
