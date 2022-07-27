@@ -1,19 +1,18 @@
 import { LetterDataType } from "../components/letter/letter";
-import { Endpoints } from "../components/wrapper/wrapper";
 
 export type GridDataMapperType = {
     gridData: LetterDataType[][];
     currentRow: number;
     inputValue: string;
     checkStatus?: boolean;
-    firstLetter: string
+    firstLetter: string;
 }
 
 export type RowTemplateType = {
     rowIndex: number;
     row: number[];
     currentRow: number;
-    firstLetter: string
+    firstLetter: string;
 }
 
 export const rowTemplate = ({
@@ -74,7 +73,6 @@ export function remapGridData ({
   
   
   const newGridData = [...gridData];
-  console.log(newGridData)
   if(checkStatus) {
     if(currentRow < 5){
       newGridData[currentRow + 1] = nextRowData
@@ -85,7 +83,7 @@ export function remapGridData ({
     //victoire 
   }
   if(checkStatus && currentRow === 5) {
-    alert('NUL')
+    alert('NUL');
   }
   
   return newGridData;

@@ -1,20 +1,28 @@
-import { Endpoints } from "../components/wrapper/wrapper"
+import { Endpoints } from "../helpers/endpoints";
 
-export function isWordExist(inputValue:string):boolean{
-    let exist = false
-    fetch(Endpoints.checkWord, {
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        method: 'POST',
-        body: JSON.stringify({
-            inputValue
-        })
-    }).then(response => {
-        console.log(response.json())
-        return response.json()
-    })
+export function isWordExist(word: string) {
 
-    return exist
+  let exist = false;
+
+  async function checkWord() {
+
+    let response = await fetch(Endpoints.checkWord, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        word
+      })
+    });
+
+    let json = await response.json();
+    exist = json.exists;
+    return exist;
+  }
+
+  let oui = checkWord();
+  console.log(oui)
+  return exist
 }
